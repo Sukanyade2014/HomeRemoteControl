@@ -6,228 +6,363 @@
     <var name = "camera_status" expr="'off'" />
     <var name = "radio_status" expr="'off'" />
     <var name = "garage_status" expr="'close'" />
+    <var name = "living_status" expr="'off'" />
+    <var name = "living_temp" expr="'45.4'" />
+    <var name = "main_status" expr="'on'" />
+    <var name = "second_status" expr="'on'" />
+    <var name = "dining_status" expr="'on'" />
+    <var name = "light_status" expr="'off'" />
+
+
     <block name="welcome">
         <prompt> Welcome to smart home control system </prompt>
         <break strength="weak" />
         <goto nextitem="name" />
      </block>
 
-  <!-- Set radio Station -->
-             
-             <field name="station">
-                 <grammar src="builtin:grammar/number" />
-                <prompt count="1"> Sure. I can do that for you. What station </prompt>
-                <prompt count="2"> Can you say again. </prompt>
-                <break strength="weak" />
-                
-                    <nomatch cond="true" count="1">
-                        <prompt bargein="true"  > Sorry. Say that again.</prompt>
-                    </nomatch>
-                 
-                 <nomatch cond="true" count="2">
-                        <prompt> Still not getting it. You may use touch pad to enter. </prompt>
-                    </nomatch>
-                 
-                    <filled>
-                        <prompt> Radio station changed to <value expr="station"/>  </prompt>
-                         <clear namelist="station"/>
-                        <goto nextitem="name" />
-                    </filled>
-             </field>
-    
+       <!-- Main Prompt -->
      <field name="name" >
        <grammar type= "application/grammar+xml" mode="voice" root="scale" version="1.0">
 	       <rule id="scale" scope="public">
-<one-of> 
+            <one-of> 
     
-      <item> <ruleref special = "GARBAGE"/> camera <ruleref special = "GARBAGE"/>  on <ruleref special = "GARBAGE"/> </item>
-      <item> <ruleref special = "GARBAGE"/> camera <ruleref special = "GARBAGE"/>  off <ruleref special = "GARBAGE"/> </item>
-      <item> <ruleref special = "GARBAGE"/> camera <ruleref special = "GARBAGE"/>  status <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> camera <ruleref special = "GARBAGE"/>  on <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> camera <ruleref special = "GARBAGE"/>  off <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> camera <ruleref special = "GARBAGE"/>  status <ruleref special = "GARBAGE"/> </item>
       
-      <item> <ruleref special = "GARBAGE"/> garage <ruleref special = "GARBAGE"/>  open <ruleref special = "GARBAGE"/> </item>
-      <item> <ruleref special = "GARBAGE"/> garage <ruleref special = "GARBAGE"/>  close <ruleref special = "GARBAGE"/> </item>
-      <item> <ruleref special = "GARBAGE"/> garage <ruleref special = "GARBAGE"/>  status <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> garage <ruleref special = "GARBAGE"/>  open <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> garage <ruleref special = "GARBAGE"/>  close <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> garage <ruleref special = "GARBAGE"/>  status <ruleref special = "GARBAGE"/> </item>
 
-      <item> <ruleref special = "GARBAGE"/> light <ruleref special = "GARBAGE"/>  on <ruleref special = "GARBAGE"/> </item>
-      <item> <ruleref special = "GARBAGE"/> light <ruleref special = "GARBAGE"/>  off<ruleref special = "GARBAGE"/> </item>
-      <item> <ruleref special = "GARBAGE"/> light <ruleref special = "GARBAGE"/>  status <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> light <ruleref special = "GARBAGE"/>  on <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> light <ruleref special = "GARBAGE"/>  off<ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> light <ruleref special = "GARBAGE"/>  status <ruleref special = "GARBAGE"/> </item>
 
-
-      <item> <ruleref special = "GARBAGE"/> radio <ruleref special = "GARBAGE"/>  on <ruleref special = "GARBAGE"/> </item>
-      <item> <ruleref special = "GARBAGE"/> radio <ruleref special = "GARBAGE"/>  off <ruleref special = "GARBAGE"/> </item>
-      <item> <ruleref special = "GARBAGE"/> radio <ruleref special = "GARBAGE"/>  status <ruleref special = "GARBAGE"/> </item>
-      <item> <ruleref special = "GARBAGE"/> radio <ruleref special = "GARBAGE"/>  station <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> radio <ruleref special = "GARBAGE"/>  on <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> radio <ruleref special = "GARBAGE"/>  off <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> radio <ruleref special = "GARBAGE"/>  status <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> radio <ruleref special = "GARBAGE"/>  station <ruleref special = "GARBAGE"/> </item>
     
-     <item> <ruleref special = "GARBAGE"/>living <ruleref special = "GARBAGE"/>thermostat <ruleref special = "GARBAGE"/> on<ruleref special = "GARBAGE"/> </item>
-     <item> <ruleref special = "GARBAGE"/> living <ruleref special = "GARBAGE"/>thermostat <ruleref special = "GARBAGE"/>off<ruleref special = "GARBAGE"/> </item>
-     <item> <ruleref special = "GARBAGE"/> living <ruleref special = "GARBAGE"/> increase <ruleref special = "GARBAGE"/> </item>
-     <item> <ruleref special = "GARBAGE"/> living <ruleref special = "GARBAGE"/> decrease <ruleref special = "GARBAGE"/> </item>
-     <item> <ruleref special = "GARBAGE"/> living <ruleref special = "GARBAGE"/> up <ruleref special = "GARBAGE"/> </item>
-     <item> <ruleref special = "GARBAGE"/> living <ruleref special = "GARBAGE"/> down <ruleref special = "GARBAGE"/> </item>
-</one-of>
+            <item> <ruleref special = "GARBAGE"/>living <ruleref special = "GARBAGE"/>thermostat <ruleref special = "GARBAGE"/> on<ruleref special = "GARBAGE"/>               </item>
+            <item> <ruleref special = "GARBAGE"/> living <ruleref special = "GARBAGE"/>thermostat <ruleref special = "GARBAGE"/>off<ruleref special = "GARBAGE"/>             </item>
+            <item> <ruleref special = "GARBAGE"/> living <ruleref special = "GARBAGE"/> increase <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> living <ruleref special = "GARBAGE"/> decrease <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> living <ruleref special = "GARBAGE"/> up <ruleref special = "GARBAGE"/> </item>
+            <item> <ruleref special = "GARBAGE"/> living <ruleref special = "GARBAGE"/> down <ruleref special = "GARBAGE"/> </item>
+            </one-of>
 
-	</rule>
+	       </rule>
        </grammar>
          
-<break strength="weak" />
- <prompt> What would you like to do ? </prompt>
- <break strength="weak" />
+         <prompt count="1"> <break strength="weak" /> What would you like to do ? </prompt>
+ 
+         <nomatch>
+            <prompt> <break strength="weak" /> Sorry. I did not understand. What operation would you like to do ? </prompt>
+            <goto nextitem="name" />
+         </nomatch>
+             
+         <nomatch cond="true" count="2">
+            <prompt bargein="true" > I'm sorry. I'm not able to understand you. Please say the operation that you would like to do on a gadget.
+            <break strength="weak" /> </prompt>
+            <goto nextitem="name" />
+        </nomatch>
+                 
+        <nomatch cond="true" count="3">
+            <prompt bargein="true"> Sorry. Im having trouble understanding you. Please say the operation that you would like to do on a gadget or say help to get              more information on how to proceed. <break strength="weak" /> </prompt>
+            <goto nextitem="name" />
+        </nomatch>
 
-<nomatch>
-<prompt> Sorry. I did not understand. </prompt>
-<break strength="weak" />
-</nomatch>
+         <noinput>
+             <prompt> Sorry. I did not hear. <break strength="weak" /> </prompt>
+        <reprompt/>
+             <goto nextitem="name" />
+         </noinput>
 
-<noinput>
-<prompt> Sorry. I did not hear. </prompt>
-<break strength="weak" />
-</noinput>
+         <noinput count="2">
+             <prompt> Sorry. I still did not hear you. Please say the operation that you would like to do on a gadget. <break strength="weak" /></prompt>
+             <goto nextitem="name" />
+         </noinput>
 
-<filled mode="any">
-         <prompt> You said <value expr="name"/> </prompt>
-         <break strength="weak" />
+         <noinput>
+             <prompt> I'm Sorry. I'm having trouble hearing you. Please say the operation that you would like to do on a gadget or say help to get more                             information on how to proceed. </prompt>    
+            <goto nextitem="name" />
+         </noinput>
+         
+         <filled mode="any">
+            <prompt> You said <value expr="name"/> </prompt>
     
       <!-- Turn on Camera -->
-    <if cond ="name=='camera on'">
-        <if cond = "camera_status == 'on'">
-				            <prompt> Surveillance camera already on </prompt>
-                            <break strength="weak"  />
-                            <clear namelist="name"/>
-                            <goto nextitem="name" />
-			         <else/>
-				            <prompt> Surveillance camera turned on </prompt>
-                            <break strength="weak"  />
-                            <assign name="camera_status" expr="'on'" />
-                            <clear namelist="name"/>
-                            <goto nextitem="name" />
-			         </if>
+            <if cond ="name=='camera on'">
+                <if cond = "camera_status == 'on'">
+				        <prompt> Surveillance camera already on </prompt>                     
+                        <clear namelist="name"/>
+                        <goto nextitem="name" />
+			     <else/>
+				        <prompt> Surveillance camera turned on </prompt>                         
+                        <assign name="camera_status" expr="'on'" />
+                        <clear namelist="name"/>
+                        <goto nextitem="name" />
+			     </if>
         
       <!-- Turn camera Off-->
-    <elseif cond ="name=='camera off'" />
+            <elseif cond ="name=='camera off'" />
         
-        <if cond = "camera_status == 'off'">
+                <if cond = "camera_status == 'off'">
 				    <prompt> Surveillance camera already off </prompt>
-                    <break strength="weak" />
                     <clear namelist="name"/>
                     <goto nextitem="name" />
-        <else/>
+                <else/>
 				    <prompt> Surveillance camera turned off </prompt>
-                     <break strength="weak" />
                     <assign name="camera_status" expr="'off'" />
                     <clear namelist="name"/>
                     <goto nextitem="name" />
-        </if>
+                </if>
     <!-- Check camera status -->
-    <elseif cond ="name=='camera status'" />
+            <elseif cond ="name=='camera status'" />
         
-        <if cond = "camera_status == 'off'">
+                <if cond = "camera_status == 'off'">
 				    <prompt> Surveillance camera is off </prompt>
-                     <break strength="weak" />
                     <goto nextitem="name" />
-        <else/>
+                <else/>
 				    <prompt> Surveillance camera is on </prompt>
-                     <break strength="weak" />
                     <goto nextitem="name" />
-        </if>
+                </if>
       <!-- check radio status-->
-    <elseif cond ="name=='radio status'" />
+        <elseif cond ="name=='radio status'" />
         
-        <if cond = "radio_status == 'off'">
+                <if cond = "radio_status == 'off'">
 				    <prompt> Radio is <emphasis level="strong"> off </emphasis> </prompt>
-                     <break strength="weak" />
                     <goto nextitem="name" />
-        <else/>
+                <else/>
 				    <prompt> Radio is on </prompt>
-                     <break strength="weak" />
                     <goto nextitem="name" />
-        </if>
+                </if>
         
       <!-- Turn on radio -->
-    <elseif cond ="name=='radio on'" />
+        <elseif cond ="name=='radio on'" />
         
-        <if cond = "radio_status == 'on'">
-            <prompt> Radio already <emphasis level="moderate">on </emphasis> </prompt>
-                 <break strength="weak" />
+            <if cond = "radio_status == 'on'">
+                <prompt> Radio already <emphasis level="moderate">on </emphasis> </prompt>
                 <clear namelist="name"/>
                 <goto nextitem="name" />
-        <else/>
+            <else/>
 				<prompt> Radio turned on </prompt>
-                 <break strength="weak" />
                 <assign name="radio_status" expr="'on'" />
                 <clear namelist="name"/>
                 <goto nextitem="name" />
-        </if>
+            </if>
         
       <!-- Switch off radio -->
-    <elseif cond ="name=='radio off'" />
+        <elseif cond ="name=='radio off'" />
         
-        <if cond = "radio_status == 'off'">
+            <if cond = "radio_status == 'off'">
 				    <prompt> Radio is already off </prompt>
-                     <break strength="weak" />
                     <clear namelist="name"/>
                     <goto nextitem="name" />
-        <else/>
+            <else/>
 				    <prompt> Radio turned off </prompt>
-                     <break strength="weak" />
                     <assign name="radio_status" expr="'off'" />
                     <clear namelist="name"/>
                     <goto nextitem="name" />
-        </if>
+                </if>
       <!-- Set Radio station -->
-    <elseif cond ="name=='set station'" />
-        <goto nextitem="station"></goto>
+        <elseif cond ="name=='set station'" />
+            <goto nextitem="station"></goto>
         
     <!-- Check garage status -->
-    <elseif cond ="name=='garage status'" />
+        <elseif cond ="name=='garage status'" />
         
-        <if cond = "garage_status == 'open'">
+            <if cond = "garage_status == 'open'">
 				    <prompt> Garage door is <emphasis level="moderate">open </emphasis> </prompt>
-                     <break strength="weak" />
                     <goto nextitem="name" />
-        <else/>
+            <else/>
 				    <prompt> Garage door is closed </prompt>
-                     <break strength="weak" />
                     <goto nextitem="name" />
-        </if>
-        
+            </if>
+            
      <!-- Open garage door -->
-    <elseif cond ="name=='garage open'" />
+        <elseif cond ="name=='garage open'" />
         
-        <if cond = "garage_status == 'open'">
+            <if cond = "garage_status == 'open'">
 				<prompt> Garage door is already open </prompt>
-                 <break strength="weak" />
                 <clear namelist="name"/>
                 <goto nextitem="name" />
-        <else/>
+            <else/>
 				<prompt> Garage door opened</prompt>
-                 <break strength="weak" />
                 <assign name="garage_status" expr="'open'" />
                 <clear namelist="name"/>
                 <goto nextitem="name" />
-        </if>
+            </if>
       <!-- Close garage door -->
-    <elseif cond ="name=='garage close'" />
+        <elseif cond ="name=='garage close'" />
         
-        <if cond = "garage_status == 'close'">
+            <if cond = "garage_status == 'close'">
 				    <prompt> Garage door is already closed </prompt>
-                     <break strength="weak" />
                     <clear namelist="name"/>
                     <goto nextitem="name" />
-        <else/>
+            <else/>
 				    <prompt> Garage door closed </prompt>
-                     <break strength="weak" />
-                    <assign name="garage_status" expr="close'" />
+                    <assign name="garage_status" expr="'close'" />
                     <clear namelist="name"/>
                     <goto nextitem="name" />
+            </if>
+
+<!-- Porch light status-->
+        <elseif cond ="name=='light status'" />
+        
+            <if cond = "light_status == 'on'">
+				    <prompt> Porch light is turned on</prompt>
+                    <clear namelist="name"/>
+                    <goto nextitem="name" />
+            <else/>
+				    <prompt> Porch light is turned off </prompt>
+                    <clear namelist="name"/>
+                    <goto nextitem="name" />
+                </if>
+
+ <!-- Porch light Off -->
+        <elseif cond ="name=='light off'" />
+        
+            <if cond = "light_status == 'off'">
+				    <prompt> Porch light is already off. </prompt>
+                    <clear namelist="name"/>
+                    <goto nextitem="name" />
+            <else/>
+				    <prompt> Porch light is turned off. </prompt>
+                    <assign name="light_status" expr="'off'" />
+                    <clear namelist="name"/>
+                    <goto nextitem="name" />
+            </if>
+
+        <!-- Porch light On -->
+        <elseif cond ="name=='light on'" />
+        
+            <if cond = "light_status == 'on'">
+				    <prompt> Porch light is already ON. </prompt>
+                    <clear namelist="name"/>
+                    <goto nextitem="name" />
+            <else/>
+				    <prompt> Porch light is turned ON. </prompt>
+                    <assign name="light_status" expr="'on'" />
+                    <clear namelist="name"/>
+                    <goto nextitem="name" />
+            </if>
+        
+         <!-- Increase Living Room Temperature -->
+        <elseif cond ="name=='living increase'" />
+            <goto nextitem="uptemp" />
+        <elseif cond ="name=='living up'" />
+                <goto nextitem="uptemp" />  
+    
+     <!-- Decrease Living Room Temperature -->
+        <elseif cond ="name=='living decrease'" />
+            <goto nextitem="downtemp" />
+        <elseif cond ="name=='living down'" />
+         <goto nextitem="downtemp" />  
+            
         </if>
-       
-    </if>
 
        </filled>
 
      </field>
        
-           
+ <!-- Set radio Station -->          
+    <field name="station">
+        <grammar src="builtin:grammar/number" />
+        <prompt count="1"> <break strength="weak" /> Sure. I can do that for you. What station </prompt>
+        <prompt count="2"> Can you say again.<break strength="weak" /> </prompt>
+        <noinput>
+            <prompt> Sorry. I did not hear. <break strength="weak" /></prompt>
+            <goto nextitem="station" />
+        </noinput>
+                
+        <nomatch cond="true" count="1">
+            <prompt bargein="true"  > Sorry. Say that again.</prompt>
+            <goto nextitem="station" />
+        </nomatch>
+                 
+        <nomatch cond="true" count="2">
+            <prompt> Still not getting it. You may use touch pad to enter. </prompt>
+            <goto nextitem="station" />
+        </nomatch>
+                 
+        <filled>
+            <prompt> Radio station changed to <value expr="station"/> <break strength="weak" /> </prompt>
+            <clear namelist="station"/>
+            <goto nextitem="name" />
+        </filled>
+    </field>
+     
+      <!-- Increase Temperature-->          
+    <field name="uptemp">
+        <grammar src="builtin:grammar/number" />    
+        <prompt count="1"> <break strength="weak" /> Current temperature <value expr= "living_temp" /> degree Farenheit. Increase how much? </prompt>
+        <prompt count="2"> Can you say again. <break strength="weak" /></prompt>
+                 
+        <noinput>
+            <prompt> Sorry. I did not hear. <break strength="weak" /></prompt>
+            <goto nextitem="uptemp" />
+        </noinput>
+                
+        <nomatch cond="true" count="1">
+            <prompt bargein="true"  > Sorry. Say that again.<break strength="weak" /></prompt>
+            <goto nextitem="uptemp" />
+        </nomatch>
+                 
+        <nomatch cond="true" count="2">
+            <prompt> Still not getting it. You may use touch pad to enter.<break strength="weak" /> </prompt>
+            <goto nextitem="uptemp" />
+        </nomatch>
+        <filled>
+            <assign name="result" expr="Number(uptemp) + Number(living_temp)"/>
+            <if cond = "result >= '80'">
+                <prompt> Thats too high. I can do only till 80 degrees.<break strength="weak" /> </prompt>
+                <goto nextitem="uptemp" />
+            <else/>
+                <prompt> Temperature increased to  <value expr="result" /> <break strength="weak" /> </prompt>
+                <assign name="living_temp" expr="Number(uptemp) + Number(living_temp)"/>
+            </if>        
+                <clear namelist="uptemp"/>
+                <goto nextitem="name" />
+            </filled>
+        </field>
+     
+       <!-- Decrease Temperature-->          
+        <field name="downtemp">
+            <grammar src="builtin:grammar/number" />    
+            <prompt count="1"> <break strength="weak" /> Current temperature <value expr= "living_temp" /> degree Farenheit. Decrease how much? </prompt>
+            <prompt count="2"> <break strength="weak" /> Can you say again. </prompt>
+                 
+            <noinput>
+                <prompt> Sorry. I did not hear.<break strength="weak" /> </prompt>
+                <goto nextitem="downtemp" />
+            </noinput>
+                
+            <nomatch cond="true" count="1">
+                <prompt bargein="true"  > Sorry. Say that again.</prompt>
+                <break strength="strong" />
+                <goto nextitem="downtemp" />
+            </nomatch>
+                 
+            <nomatch cond="true" count="2">
+                <prompt> Still not getting it. You may use touch pad to enter.<break strength="weak" /> </prompt>
+                <goto nextitem="downtemp" />
+            </nomatch>
+            <filled>
+                <assign name="result" expr="Number(living_temp) - Number(downtemp)"/>
+                <if cond = "'30' >= result">
+                    <prompt> Thats too low. I can do only till 30 degrees. <break strength="weak" /> </prompt>
+                    <goto nextitem="downtemp" />
+                <else/>
+                    <prompt> Temperature decreased to  <value expr="result" />  </prompt>
+                    <assign name="living_temp" expr=" Number(living_temp) - Number(downtemp)"/>
+                </if>
+                        
+                    <clear namelist="downtemp"/>
+                    <goto nextitem="name" />
+                </filled>
+             </field>
+                            
 
    </form>
  </vxml>
